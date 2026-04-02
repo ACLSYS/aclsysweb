@@ -221,18 +221,4 @@
 
 ---
 
-## 09. Checklist de consistencia
-
-Antes de publicar cualquier pieza de comunicación:
-
-- [ ] ¿Se usa Plus Jakarta Sans?
-- [ ] ¿El azul usado es `#29B5E8`?
-- [ ] ¿El fondo es blanco o `#F8F9FB`?
-- [ ] ¿El logo tiene espacio de respiro suficiente?
-- [ ] ¿El tono es profesional y directo?
-- [ ] ¿Se menciona la Riviera Maya o Península de Yucatán?
-- [ ] ¿Los CTAs son claros y directos?
-
----
-
 *ACLSYS · Manual de Identidad v1.0 · 2025 · Confidencial*
