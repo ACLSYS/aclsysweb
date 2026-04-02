@@ -78,7 +78,9 @@ aclsysweb/
 | `/proyectos` | Sectores y tipos de proyectos |
 | `/contacto` | Formulario de contacto + WhatsApp |
 
+## Licencia
 
+Privado — © 2025 ACLSYS. Todos los derechos reservados.
 
 
 
