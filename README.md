@@ -78,58 +78,8 @@ aclsysweb/
 | `/proyectos` | Sectores y tipos de proyectos |
 | `/contacto` | Formulario de contacto + WhatsApp |
 
----
 
-## Inicio rápido
-```bash
-# Clonar el repositorio
-git clone https://github.com/ACLSYS/aclsysweb.git
-cd aclsysweb
 
-# Instalar dependencias
-npm install
 
-# Variables de entorno
-cp .env.example .env.local
 
-# Servidor de desarrollo
-npm run dev
-```
 
-Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
-
----
-
-## Variables de entorno
-```env
-RESEND_API_KEY=tu_api_key
-NEXT_PUBLIC_WHATSAPP_NUMBER=529871039604
-NEXT_PUBLIC_WHATSAPP_MESSAGE=Hola, me interesa conocer más sobre los servicios de ACLSYS.
-```
-
----
-
-## Deploy
-
-El proyecto se despliega automáticamente en **Vercel** al hacer push a `main`.
-```bash
-git add .
-git commit -m "feat: descripción del cambio"
-git push origin main
-```
-
----
-
-## Equipo
-
-| Rol | Responsabilidad |
-|-----|----------------|
-| CTO | Arquitectura y decisiones técnicas |
-| Developer | Desarrollo frontend y backend |
-| Diseño | UI/UX e identidad visual |
-
----
-
-## Licencia
-
-Privado — © 2025 ACLSYS. Todos los derechos reservados.
