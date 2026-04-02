@@ -14,7 +14,6 @@
 | **Mercado objetivo** | Empresas de la Península de Yucatán |
 | **Dominio** | aclsys.net |
 | **Idioma** | Español (versión inicial) |
-| **Referencia visual** | snowflake.com |
 | **Versión** | 1.0 — 2025 |
 
 ---
