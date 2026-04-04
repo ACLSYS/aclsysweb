@@ -2,10 +2,12 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { useDrawer } from '@/context/DrawerContext'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const { openDrawer } = useDrawer()
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 30)
@@ -34,22 +36,22 @@ export default function Navbar() {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
 
           {/* LOGO */}
-          <Link href="/" style={{
-            fontSize: '1.5rem', fontWeight: 800, color: 'var(--ink)',
-            letterSpacing: '-1px', display: 'flex', alignItems: 'center', gap: '2px',
-            textDecoration: 'none',
-          }}>
-           <img src="/logo.png" alt="ACLSYS" style={{ height: '36px', width: 'auto' }} />
-          </Link>
+<Link href="/">
+  <img
+    src="/logo.png"
+    alt="ACLSYS"
+    style={{ height: '38px', width: 'auto', display: 'block' }}
+  />
+</Link>
 
           {/* LINKS DESKTOP */}
-          <ul style={{
+          <ul className="nav-links-desktop" style={{
             display: 'flex', alignItems: 'center', gap: '.25rem', listStyle: 'none',
-          }} className="nav-links-desktop">
+          }}>
             {[
-              { href: '/', label: 'Inicio' },
+              { href: '/',          label: 'Inicio' },
               { href: '/servicios', label: 'Servicios' },
-              { href: '/nosotros', label: 'Nosotros' },
+              { href: '/nosotros',  label: 'Nosotros' },
               { href: '/proyectos', label: 'Proyectos' },
             ].map((item) => (
               <li key={item.href}>
@@ -57,7 +59,6 @@ export default function Navbar() {
                   display: 'block', padding: '.5rem .9rem',
                   fontSize: '.875rem', fontWeight: 500, color: 'var(--muted)',
                   borderRadius: '7px', transition: 'color .2s, background .2s',
-                  textDecoration: 'none',
                 }}>
                   {item.label}
                 </Link>
@@ -66,38 +67,26 @@ export default function Navbar() {
           </ul>
 
           {/* ACTIONS DESKTOP */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '.6rem' }} className="nav-actions-desktop">
-            <Link href="/contacto" style={{
-              background: 'transparent', color: 'var(--muted)', padding: '.5rem .9rem',
-              borderRadius: '7px', fontSize: '.875rem', fontWeight: 600,
-              textDecoration: 'none', transition: 'color .2s, background .2s',
-            }}>
+          <div className="nav-actions-desktop" style={{ display: 'flex', alignItems: 'center', gap: '.6rem' }}>
+            <button
+              onClick={openDrawer}
+              className="btn btn-ghost"
+            >
               Contacto
-            </Link>
-            <button onClick={openWA} style={{
-              background: 'var(--blue)', color: '#fff', padding: '.55rem 1.2rem',
-              borderRadius: '10px', border: 'none', fontSize: '.875rem', fontWeight: 600,
-              cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '.4rem',
-              boxShadow: '0 2px 8px rgba(41,181,232,.3)', transition: 'all .2s',
-              fontFamily: 'inherit',
-            }}>
-              <i className="fab fa-whatsapp" /> WhatsApp
+            </button>
+            <button className="btn btn-primary" onClick={openWA}>
+              <i className="fab fa-whatsapp"></i> WhatsApp
             </button>
           </div>
 
-          {/* HAMBURGER */}
+          {/* HAMBURGER MOBILE */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="hamburger-btn"
-            aria-label="Menú"
-            style={{
-              background: 'none', border: 'none', cursor: 'pointer',
-              flexDirection: 'column', gap: '5px', padding: '4px', display: 'none',
-            }}
           >
-            <span style={{ display: 'block', width: '22px', height: '2px', background: 'var(--ink)', borderRadius: '2px', transition: '.3s' }} />
-            <span style={{ display: 'block', width: '22px', height: '2px', background: 'var(--ink)', borderRadius: '2px', transition: '.3s' }} />
-            <span style={{ display: 'block', width: '22px', height: '2px', background: 'var(--ink)', borderRadius: '2px', transition: '.3s' }} />
+            <span></span>
+            <span></span>
+            <span></span>
           </button>
 
         </div>
@@ -111,45 +100,52 @@ export default function Navbar() {
           padding: '1.2rem 6%', display: 'flex', flexDirection: 'column', gap: '.5rem',
         }}>
           {[
-            { href: '/', label: 'Inicio' },
+            { href: '/',          label: 'Inicio' },
             { href: '/servicios', label: 'Servicios' },
-            { href: '/nosotros', label: 'Nosotros' },
+            { href: '/nosotros',  label: 'Nosotros' },
             { href: '/proyectos', label: 'Proyectos' },
-            { href: '/contacto', label: 'Contacto' },
           ].map((item) => (
             <Link key={item.href} href={item.href}
               onClick={() => setMenuOpen(false)}
               style={{
                 padding: '.7rem 1rem', fontWeight: 500, color: 'var(--ink2)',
-                borderRadius: '8px', textDecoration: 'none', transition: 'background .2s',
-                fontSize: '.95rem',
-              }}
-            >
+                borderRadius: '8px', transition: 'background .2s', display: 'block',
+              }}>
               {item.label}
             </Link>
           ))}
-          <button onClick={() => { openWA(); setMenuOpen(false) }} style={{
-            marginTop: '.5rem', background: 'var(--blue)', color: '#fff',
-            border: 'none', borderRadius: '10px', padding: '.8rem 1rem',
-            fontWeight: 600, fontSize: '.95rem', cursor: 'pointer',
-            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '.5rem',
-            fontFamily: 'inherit',
-          }}>
-            <i className="fab fa-whatsapp" /> WhatsApp
+          <button
+            onClick={() => { openDrawer(); setMenuOpen(false) }}
+            className="btn btn-ghost"
+            style={{ justifyContent: 'flex-start', padding: '.7rem 1rem' }}
+          >
+            Contacto
+          </button>
+          <button className="btn btn-primary" onClick={openWA} style={{ marginTop: '.5rem', justifyContent: 'center' }}>
+            <i className="fab fa-whatsapp"></i> WhatsApp
           </button>
         </div>
       )}
 
       <style>{`
-        :root {
-          --white: #ffffff;
-          --blue: #29B5E8;
-          --blue-d: #1a9fd4;
-          --ink: #0d1117;
-          --ink2: #1e293b;
-          --muted: #64748b;
-          --border: #e2e8f0;
-          --surface: #f1f5f9;
+        .nav-links-desktop { display: flex !important; }
+        .nav-actions-desktop { display: flex !important; }
+        .hamburger-btn {
+          display: none;
+          background: none;
+          border: none;
+          flex-direction: column;
+          gap: 5px;
+          padding: 4px;
+          cursor: pointer;
+        }
+        .hamburger-btn span {
+          display: block;
+          width: 22px;
+          height: 2px;
+          background: var(--ink);
+          border-radius: 2px;
+          transition: .3s;
         }
         @media (max-width: 768px) {
           .nav-links-desktop { display: none !important; }

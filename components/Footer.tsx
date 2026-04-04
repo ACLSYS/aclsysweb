@@ -14,9 +14,13 @@ export default function Footer() {
         <div style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr 1fr 1fr', gap: '3rem', marginBottom: '3rem' }} className="footer-grid">
 
           <div>
-            <Link href="/" style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--white)', letterSpacing: '-1px', display: 'block', marginBottom: '1rem', textDecoration: 'none' }}>
-              <img src="/logo.png" alt="ACLSYS" style={{ height: '36px', width: 'auto' }} />
-            </Link>
+<Link href="/">
+  <img
+    src="/logonegro.jpg"
+    alt="ACLSYS"
+    style={{ width: '180px', height: 'auto', display: 'block', marginBottom: '1rem' }}
+  />
+</Link>
             <p style={{ fontSize: '.875rem', lineHeight: 1.7, maxWidth: '240px' }}>
               Infraestructura IT, soporte técnico, desarrollo de software y productos propios para empresas de la Península de Yucatán.
             </p>
