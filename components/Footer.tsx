@@ -26,7 +26,7 @@ export default function Footer() {
             </p>
             <div style={{ display: 'flex', gap: '.6rem', marginTop: '1.5rem' }}>
               {[
-                { icon: 'fab fa-linkedin-in', href: '#' },
+                { icon: 'fab fa-facebook-f', href: 'https://www.facebook.com/aclsys' },
                 { icon: 'fab fa-whatsapp', onClick: openWA },
                 { icon: 'fas fa-envelope', href: 'mailto:info@aclsys.net' },
               ].map((s, i) => (
