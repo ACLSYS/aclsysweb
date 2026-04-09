@@ -3,12 +3,10 @@
 import { useState } from 'react'
 import { useDrawer } from '@/context/DrawerContext'
 
-/* ══════════════════════════════════════
-   DATA
-══════════════════════════════════════ */
 type Categoria = 'Todos' | 'Infraestructura' | 'Desarrollo' | 'Soporte'
 
 const servicios = [
+
   // ── INFRAESTRUCTURA (1-7) ──
   {
     categoria: 'Infraestructura' as Categoria,
@@ -244,7 +242,7 @@ const servicios = [
     ],
   },
 
-  // ── SOPORTE (12-15) ──
+  // ── SOPORTE (12-14) — sin impresoras ──
   {
     categoria: 'Soporte' as Categoria,
     icon: 'fas fa-headset',
@@ -289,27 +287,6 @@ const servicios = [
   },
   {
     categoria: 'Soporte' as Categoria,
-    icon: 'fas fa-print',
-    iconBg: 'rgba(234,179,8,.1)',
-    iconColor: '#b45309',
-    tag: 'Soporte & Hardware',
-    title: 'Reparación de Impresoras',
-    desc: 'Diagnóstico y reparación de impresoras de todas las marcas para mantener tu operación sin interrupciones.',
-    problemas: [
-      'Impresoras que no imprimen o se atascan',
-      'Calidad de impresión deficiente',
-      'Errores de conectividad o configuración',
-      'Consumibles mal instalados o agotados',
-    ],
-    valores: [
-      'Diagnóstico y reparación en sitio',
-      'Todas las marcas: HP, Epson, Canon, Brother',
-      'Reemplazo de piezas y cabezales',
-      'Configuración en red y mantenimiento preventivo',
-    ],
-  },
-  {
-    categoria: 'Soporte' as Categoria,
     icon: 'fas fa-desktop',
     iconBg: 'rgba(234,179,8,.1)',
     iconColor: '#b45309',
@@ -340,9 +317,6 @@ const filtroLabels: Record<Categoria, string> = {
   'Soporte': 'Soporte & Hardware',
 }
 
-/* ══════════════════════════════════════
-   COMPONENT
-══════════════════════════════════════ */
 export default function Servicios() {
   const [activo, setActivo] = useState<Categoria>('Todos')
   const { openDrawer } = useDrawer()
@@ -353,33 +327,21 @@ export default function Servicios() {
 
   return (
     <>
-      {/* ── PAGE HERO ── */}
-      <div style={{
-        padding: '120px 6% 60px',
-        background: 'linear-gradient(180deg, #f0f9ff 0%, var(--white) 100%)',
-        borderBottom: '1px solid var(--border)',
-        textAlign: 'center',
-      }}>
+      <div style={{ padding: '120px 6% 60px', background: 'linear-gradient(180deg, #f0f9ff 0%, var(--white) 100%)', borderBottom: '1px solid var(--border)', textAlign: 'center' }}>
         <div className="container">
           <span className="eyebrow">Lo que hacemos</span>
           <h1 className="heading-xl" style={{ margin: '.5rem 0 1rem' }}>Nuestros Servicios</h1>
           <p className="lead" style={{ maxWidth: 580, margin: '0 auto' }}>
-            Infraestructura en campo, soporte técnico y desarrollo de software.
-            Todo lo que tu empresa necesita en tecnología — en un solo proveedor.
+            Infraestructura en campo, soporte técnico y desarrollo de software. Todo lo que tu empresa necesita en tecnología — en un solo proveedor.
           </p>
         </div>
       </div>
 
-      {/* ── FILTROS STICKY ── */}
       <div className="filtros-wrap">
         <div className="container">
           <div className="filtros-inner">
             {filtros.map((f) => (
-              <button
-                key={f}
-                onClick={() => setActivo(f)}
-                className={`filtro-chip ${activo === f ? 'active' : ''}`}
-              >
+              <button key={f} onClick={() => setActivo(f)} className={`filtro-chip ${activo === f ? 'active' : ''}`}>
                 {filtroLabels[f]}
               </button>
             ))}
@@ -387,14 +349,12 @@ export default function Servicios() {
         </div>
       </div>
 
-      {/* ── GRID DE SERVICIOS ── */}
       <section className="section">
         <div className="container">
           <p style={{ fontSize: '.85rem', color: 'var(--muted)', marginBottom: '2rem' }}>
             Mostrando <strong style={{ color: 'var(--ink)' }}>{filtrados.length}</strong> servicios
             {activo !== 'Todos' && <> en <strong style={{ color: 'var(--blue)' }}>{filtroLabels[activo]}</strong></>}
           </p>
-
           <div className="srv-full-grid">
             {filtrados.map((s) => (
               <div key={s.title} className="srv-full-card">
@@ -408,7 +368,6 @@ export default function Servicios() {
                     <p>{s.desc}</p>
                   </div>
                 </div>
-
                 <div className="srv-full-body">
                   <div>
                     <div className="srv-block-title">Problemas que resolvemos</div>
@@ -433,7 +392,6 @@ export default function Servicios() {
                     </ul>
                   </div>
                 </div>
-
                 <div className="srv-full-cta">
                   <span>¿Te interesa este servicio?</span>
                   <button onClick={openDrawer} className="btn btn-primary">
@@ -446,7 +404,6 @@ export default function Servicios() {
         </div>
       </section>
 
-      {/* ── CTA BAND ── */}
       <div style={{ background: 'linear-gradient(135deg, var(--navy) 0%, #1e293b 100%)', padding: '80px 6%', textAlign: 'center' }}>
         <div className="container">
           <span className="eyebrow" style={{ color: 'rgba(255,255,255,.5)' }}>¿Dudas?</span>

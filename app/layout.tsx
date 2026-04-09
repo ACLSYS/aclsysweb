@@ -8,16 +8,28 @@ import ContactDrawer from '@/components/ContactDrawer'
 
 export const metadata: Metadata = {
   title: 'ACLSYS | Una sola empresa para toda tu tecnología',
-  description: 'Infraestructura IT, soporte técnico, desarrollo de software y productos propios para empresas de la Península de Yucatán.',
-  keywords: 'IT, infraestructura, redes, cámaras, Ubiquiti, MikroTik, desarrollo web, Riviera Maya, Península de Yucatán',
+  description: 'Consultoría IT, infraestructura tecnológica, desarrollo de software y soporte técnico para empresas de la Riviera Maya y la Península de Yucatán. Ubiquiti, MikroTik, Cloud, CCTV y más.',
+  keywords: 'IT Riviera Maya, infraestructura tecnológica Quintana Roo, desarrollo web Riviera Maya, soporte técnico Playa del Carmen, redes empresariales Cancún, ciberseguridad Yucatán, ACLSYS, consultoría IT México',
+  authors: [{ name: 'ACLSYS', url: 'https://aclsys.net' }],
+  creator: 'ACLSYS',
+  metadataBase: new URL('https://aclsys.net'),
   openGraph: {
     title: 'ACLSYS | Una sola empresa para toda tu tecnología',
-    description: 'Infraestructura IT, soporte técnico y desarrollo de software para la Península de Yucatán.',
+    description: 'Infraestructura IT, desarrollo de software y soporte técnico para empresas de la Riviera Maya y la Península de Yucatán.',
     url: 'https://aclsys.net',
     siteName: 'ACLSYS',
     locale: 'es_MX',
     type: 'website',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'ACLSYS — Una sola empresa para toda tu tecnología' }],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ACLSYS | Una sola empresa para toda tu tecnología',
+    description: 'Infraestructura IT, desarrollo de software y soporte técnico para empresas de la Riviera Maya.',
+    images: ['/og-image.png'],
+  },
+  robots: { index: true, follow: true },
+  alternates: { canonical: 'https://aclsys.net' },
 }
 
 export default function RootLayout({
