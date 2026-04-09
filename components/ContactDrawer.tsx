@@ -55,13 +55,37 @@ export default function ContactDrawer() {
     window.open(`https://wa.me/529871039604?text=${msg}`, '_blank')
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
-    setTimeout(() => {
+
+    const form = e.currentTarget
+    const data = {
+      nombre:   (form.elements.namedItem('nombre')   as HTMLInputElement).value,
+      empresa:  (form.elements.namedItem('empresa')  as HTMLInputElement).value,
+      email:    (form.elements.namedItem('email')    as HTMLInputElement).value,
+      telefono: (form.elements.namedItem('telefono') as HTMLInputElement).value,
+      servicio: (form.elements.namedItem('servicio') as HTMLSelectElement).value,
+      mensaje:  (form.elements.namedItem('mensaje')  as HTMLTextAreaElement).value,
+    }
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+
+      if (res.ok) {
+        setSent(true)
+      } else {
+        alert('Hubo un error al enviar el mensaje. Intenta de nuevo.')
+      }
+    } catch {
+      alert('Hubo un error al enviar el mensaje. Intenta de nuevo.')
+    } finally {
       setLoading(false)
-      setSent(true)
-    }, 1200)
+    }
   }
 
   const handleClose = () => {
@@ -176,54 +200,56 @@ export default function ContactDrawer() {
               </div>
 
               {/* CAMPOS */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+<div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                  <div className="fg">
-                    <label>Nombre *</label>
-                    <input type="text" placeholder="Tu nombre" required />
-                  </div>
-                  <div className="fg">
-                    <label>Empresa</label>
-                    <input type="text" placeholder="Tu empresa" />
-                  </div>
-                </div>
+  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+    <div className="fg">
+      <label>Nombre *</label>
+      <input name="nombre" type="text" placeholder="Tu nombre" required />
+    </div>
+    <div className="fg">
+      <label>Empresa</label>
+      <input name="empresa" type="text" placeholder="Tu empresa" />
+    </div>
+  </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                  <div className="fg">
-                    <label>Email *</label>
-                    <input type="email" placeholder="tu@email.com" required />
-                  </div>
-                  <div className="fg">
-                    <label>Teléfono</label>
-                    <input type="tel" placeholder="+52 984 000 0000" />
-                  </div>
-                </div>
+  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+    <div className="fg">
+      <label>Email *</label>
+      <input name="email" type="email" placeholder="tu@email.com" required />
+    </div>
+    <div className="fg">
+      <label>Teléfono</label>
+      <input name="telefono" type="tel" placeholder="+52 984 000 0000" />
+    </div>
+  </div>
 
-                <div className="fg">
-                  <label>Servicio de interés</label>
-                  <select>
-                    <option value="">Selecciona un servicio…</option>
-                    {serviceOptions.map((group) => (
-                      <optgroup key={group.group} label={group.group}>
-                        {group.items.map((item) => (
-                          <option key={item} value={item}>{item}</option>
-                        ))}
-                      </optgroup>
-                    ))}
-                    <option value="otro">No estoy seguro / Necesito orientación</option>
-                  </select>
-                </div>
+  <div className="fg">
+    <label>Servicio de interés</label>
+    <select name="servicio">
+      <option value="">Selecciona un servicio…</option>
+      {serviceOptions.map((group) => (
+        <optgroup key={group.group} label={group.group}>
+          {group.items.map((item) => (
+            <option key={item} value={item}>{item}</option>
+          ))}
+        </optgroup>
+      ))}
+      <option value="otro">No estoy seguro / Necesito orientación</option>
+    </select>
+  </div>
 
-                <div className="fg">
-                  <label>Mensaje *</label>
-                  <textarea
-                    placeholder="Cuéntanos sobre tu proyecto, necesidad o pregunta…"
-                    required
-                    style={{ minHeight: 110 }}
-                  />
-                </div>
+  <div className="fg">
+    <label>Mensaje *</label>
+    <textarea
+      name="mensaje"
+      placeholder="Cuéntanos sobre tu proyecto, necesidad o pregunta…"
+      required
+      style={{ minHeight: 110 }}
+    />
+  </div>
 
+  
                 <button
                   type="submit"
                   disabled={loading}
